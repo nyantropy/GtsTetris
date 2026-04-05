@@ -31,7 +31,30 @@ make
 
 This produces the `Tetris` executable in the build directory.
 
-## Build On Windows With MinGW
+## Windows (One-Click Build)
+
+Windows users can build the project by running:
+
+```bat
+build_windows.bat
+```
+
+This script:
+
+- initializes Git submodules
+- configures the project with CMake
+- builds the project with MinGW
+- produces a statically linked executable
+
+Make sure MinGW and CMake are installed and available in your `PATH`.
+
+The built executable will be available at:
+
+```text
+build\Tetris.exe
+```
+
+### Manual Build (MinGW)
 
 Use a static build. Dynamic builds may fail at runtime if MinGW runtime DLLs are missing.
 
