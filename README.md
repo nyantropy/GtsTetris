@@ -1,0 +1,78 @@
+# Gravitas Tetris
+
+Gravitas Tetris is a standalone C++ Tetris project built on a custom ECS-based engine included in this repository as a Git submodule. It implements modern Tetris mechanics such as ghost pieces, hold, next-piece preview, and hard drop.
+
+## Requirements
+
+- CMake
+- A C++ compiler with C++20 support: GCC, Clang, or MSVC
+- Git, including submodule support
+
+## Clone And Initialize Submodules
+
+The engine lives in `/engine` as a Git submodule. You must initialize it before configuring or building the project.
+
+```bash
+git clone <repo>
+cd <repo>
+git submodule update --init --recursive
+```
+
+## Build On Linux
+
+Use the standard CMake flow:
+
+```bash
+mkdir build
+cd build
+cmake ..
+make
+```
+
+This produces the `Tetris` executable in the build directory.
+
+## Build On Windows With MinGW
+
+Use a static build. Dynamic builds may fail at runtime if MinGW runtime DLLs are missing.
+
+```bash
+mkdir build
+cd build
+cmake .. -G "MinGW Makefiles" ^
+    -DCMAKE_BUILD_TYPE=Release ^
+    -DCMAKE_EXE_LINKER_FLAGS="-static -static-libgcc -static-libstdc++"
+mingw32-make
+```
+
+`-static` helps produce an executable that does not depend on missing MinGW runtime DLLs. This is important because the engine is not distributed as shared libraries.
+
+## Running The Game
+
+Run the built executable from the build directory:
+
+```bash
+./Tetris
+```
+
+On Windows:
+
+```bat
+Tetris.exe
+```
+
+The `resources` directory must be next to the executable at runtime. The CMake build copies it automatically after building.
+
+## Controls
+
+- A / D: move
+- Q / E: rotate
+- Left/Right Arrow: rotate camera
+- Space: hard drop
+- R: hold
+- X: pause
+
+## Notes
+
+- This project is built on a custom engine included as a submodule.
+- The engine version is locked to the submodule revision in this repository.
+- There is no save system; high score tracking is session-only.
