@@ -26,8 +26,8 @@ Gravitas Engine: https://github.com/nyantropy/Gravitas
 The engine lives in `/engine` as a Git submodule. You must initialize it before configuring or building the project.
 
 ```bash
-git clone <repo>
-cd <repo>
+git clone https://github.com/nyantropy/GtsTetris.git
+cd GtsTetris
 git submodule update --init --recursive
 ```
 
