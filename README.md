@@ -2,6 +2,19 @@
 
 Gravitas Tetris is a standalone C++ Tetris project built on a custom ECS-based engine included in this repository as a Git submodule. It implements modern Tetris mechanics such as ghost pieces, hold, next-piece preview, and hard drop.
 
+## Built With
+
+This project is built on top of the **Gravitas Engine**, a custom ECS-driven rendering and simulation engine.
+
+The engine is included as a git submodule and provides:
+
+- ECS architecture
+- rendering pipeline (Vulkan)
+- input handling
+- camera systems
+
+Gravitas Engine: https://github.com/nyantropy/Gravitas
+
 ## Requirements
 
 - CMake
