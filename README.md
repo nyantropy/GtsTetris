@@ -44,22 +44,36 @@ make
 
 This produces the `Tetris` executable in the build directory.
 
-## Windows (One-Click Build)
+Alternatively, you can also use the build_linux.sh script that is provided in the root directory.
 
-Windows users can build the project by running:
+## Windows Build (Recommended: Ninja)
 
-```bat
-build_windows.bat
+This project uses Ninja for builds on Windows to avoid toolchain inconsistencies with MinGW and Visual Studio generators.
+
+### Requirements
+
+- CMake
+- Ninja
+- A C++ compiler with C++20 support, such as MSVC or Clang
+- Git, including submodule support
+
+### Build Instructions
+
+```bash
+git clone https://github.com/nyantropy/GtsTetris.git
+cd GtsTetris
+git submodule update --init --recursive
+mkdir build
+cd build
+cmake .. -G Ninja
+cmake --build .
 ```
 
-This script:
+For a Release build, configure with:
 
-- initializes Git submodules
-- configures the project with CMake
-- builds the project with MinGW
-- produces a statically linked executable
-
-Make sure MinGW and CMake are installed and available in your `PATH`.
+```bash
+cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release
+```
 
 The built executable will be available at:
 
@@ -67,20 +81,27 @@ The built executable will be available at:
 build\Tetris.exe
 ```
 
-### Manual Build (MinGW)
+### One-Click Build
 
-Use a static build. Dynamic builds may fail at runtime if MinGW runtime DLLs are missing.
+Alternatively, run:
 
-```bash
-mkdir build
-cd build
-cmake .. -G "MinGW Makefiles" ^
-    -DCMAKE_BUILD_TYPE=Release ^
-    -DCMAKE_EXE_LINKER_FLAGS="-static -static-libgcc -static-libstdc++"
-mingw32-make
+```bat
+build_windows.bat
 ```
 
-`-static` helps produce an executable that does not depend on missing MinGW runtime DLLs. This is important because the engine is not distributed as shared libraries.
+The script:
+
+- initializes Git submodules
+- configures the project with CMake and the Ninja generator
+- builds the project with `cmake --build .`
+
+If you are using a GCC-like toolchain with Ninja and specifically need static runtime linking, you can add:
+
+```text
+-DCMAKE_EXE_LINKER_FLAGS="-static -static-libgcc -static-libstdc++"
+```
+
+Do not use those linker flags with MSVC-based toolchains.
 
 ## Running The Game
 
