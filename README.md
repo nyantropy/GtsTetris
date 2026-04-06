@@ -21,6 +21,17 @@ Gravitas Engine: https://github.com/nyantropy/Gravitas
 - A C++ compiler with C++20 support: GCC, Clang, or MSVC
 - Git, including submodule support
 
+### Windows
+
+- [CMake](https://cmake.org/)
+- [Ninja](https://ninja-build.org/)
+- A C++ compiler: MSVC (Visual Studio Build Tools), clang, or MinGW (`gcc`)
+
+⚠️ **Important:**  
+Both **Ninja** and your **C++ compiler must be available in your system PATH**.
+
+If they are not in PATH, the build will fail.
+
 ## Clone And Initialize Submodules
 
 The engine lives in `/engine` as a Git submodule. You must initialize it before configuring or building the project.
@@ -50,11 +61,18 @@ Alternatively, you can also use the build_linux.sh script that is provided in th
 
 This project uses Ninja for builds on Windows to avoid toolchain inconsistencies with MinGW and Visual Studio generators.
 
+> ⚠️ **Important**
+> The build script (`build_windows.bat`) requires:
+> - `ninja` to be available in PATH
+> - a working C++ compiler in PATH
+>
+> If either is missing, the script will fail.
+
 ### Requirements
 
 - CMake
 - Ninja
-- A C++ compiler with C++20 support, such as MSVC or Clang
+- A C++ compiler with C++20 support (MSVC, clang, g++)
 - Git, including submodule support
 
 ### Build Instructions
@@ -102,6 +120,15 @@ If you are using a GCC-like toolchain with Ninja and specifically need static ru
 ```
 
 Do not use those linker flags with MSVC-based toolchains.
+
+### Troubleshooting
+
+If the build fails immediately:
+
+- Run `ninja --version` in your terminal
+- Run your compiler, for example `cl`, `g++`, or `clang++`
+
+If these commands are not recognized, they are not in your PATH and must be configured before building.
 
 ## Running The Game
 
